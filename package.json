@@ -29,7 +29,7 @@
     "watchify": "^3.9.0"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register test/*.test.ts"
+    "test": "TS_NODE_DISABLE_WARNINGS=true mocha -r ts-node/register test/*.test.ts"
   },
   "repository": {
     "type": "git",

@@ -1,20 +1,24 @@
-import { sayHello } from "./greet";
 import { Rock } from "./lib/Rock";
-import { ViewModel } from "./lib/view-model"
+import { ViewModel, TestViewModel } from "./lib/view-model"
 
-function showHello(divName: string, name: string) {
-    const elt = document.getElementById(divName);
-    elt.innerText = sayHello(name);
-}
 
-console.log('hey, it is me???');
+let myRock = new Rock();
+let testViewModel = new TestViewModel('I am Moving Every Second, click me!');
 
-// showHello("greeting", "TypeScript update");
-let myRock = new Rock('rock');
-let viewModel = new ViewModel(50,100,'I am ViewModel!');
-myRock.registerViewModel('vm', viewModel);
+myRock.registerViewModel('vm', testViewModel);
 myRock.init();
-window.viewModel = viewModel;
-viewModel.x = 200;
-viewModel.x = 400;
-// setInterval("viewModel.x += 5;", 1000);
+
+
+testViewModel.x = 100;
+setInterval(
+	(function(){
+		if(this.x < 50){
+			if(this.y < 50) this.x += 50;
+			else this.y -=50;
+		} 
+		else{
+			if(this.y < 50) this.y += 50;
+			else this.x -= 50;
+		} 
+	}).bind(testViewModel), 
+	1000);

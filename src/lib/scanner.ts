@@ -1,16 +1,19 @@
-import { Map } from "./map"
-import { Mapping } from "./map"
+import { Map } from "./map";
+import { Mapping } from "./map";
+import { Rock } from "./Rock";
+
 
 export class Scanner {
 	private prefix = "rock-";
-	private rock :object;
+	private rock :Rock;
 
-	constructor(rock :object) {
+	constructor(rock :Rock) {
 		this.rock = rock;
         this.prefix = rock.prefix;
+        console.log('new scanner');
 	}
 
-	// 
+	// 扫描所有元素，放入map
 	public scan() :Array<Map>{
 		console.log('scan--------');
         let mapList : Array<Map> =[];

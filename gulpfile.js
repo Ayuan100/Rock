@@ -30,7 +30,7 @@ var watchedBrowserify = watchify(browserify({
 function copyHTML(){
     console.log('copyHTML');
     return gulp.src(paths.pages)
-        .pipe(gulp.dest("dest"));
+        .pipe(gulp.dest("dist"));
 }
 function bundle() {
     copyHTML();
@@ -40,12 +40,13 @@ function bundle() {
     
     return watchedBrowserify
         .bundle()
+        .on('error', function (error) { console.error(error.toString()); })
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest("dest"));
+        .pipe(gulp.dest("dist"));
 }
 
 gulp.task("copy-html", copyHTML);
